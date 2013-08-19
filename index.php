@@ -35,11 +35,11 @@ include( 'header.php' );
 	<img src="images/5-card-nancy.jpg" alt="" width="240" height="163" align="right" />
 	<p><?php include '5cardstats.inc';?></p>
 
-	<p>This quasi experimental web site is designed to foster visual thinking. It is based completely, or more loosely... copied, from the <a href="http://www.scottmccloud.com/inventions/nancy/nancy.html">Five Card Nancy game</a> devised by comics guru <a href="http://www.scottmccloud.com/">Scott McCloud</a> and the <a href="http://www.7415comics.com/nancy">nifty web version at 741.5 Comics</a>.</p>
+	<p><strong>This web site is designed to foster visual creativity by making stories out of photos.</strong> It is based completely on the <a href="http://www.scottmccloud.com/inventions/nancy/nancy.html">Five Card Nancy game</a> devised by comics guru <a href="http://www.scottmccloud.com/">Scott McCloud</a> and the <a href="http://www.7415comics.com/nancy">nifty web version at 741.5 Comics</a>.</p>
 
-	<p>However, rather than drawing from a hand of randomly chosen panels of the old Nancy comic, my version draws upon collections of photos specified by a tag in flickr. You are dealt five random photos for each draw, and your task is to select one each time to add to a selection of images, that taken together as a final set of 5 images- tell a story in pictures.</p>
+	<p>However, rather than using randomly chosen panels of the old Nancy comic, my version draws upon collections of photos specified by a tag in <a href="http://flickr.com/">flickr</a>. You are dealt five random photos for each draw, and your task is to select one each time to add to your building set of images, that taken together as a final set of 5 - tell a story in pictures.</p>
 
-	<p>When you are done, you the option to add a title and explanation, then you can save the story so you can put a link in your resume or send to your Mom (she pay print it out and tape it to the fridge, or she may criticize your creativity, your mileage and mom may vary). Plus we offer the ability to tweet your story or use an embed code to add it to your own web site.</p>
+	<p>When you are done, you can add a title and explanation, and save the story. You can easily put a link in your resume or send to your Mom (she pay print it out and tape it to the fridge, or she may criticize your creativity, your mileage and mom may vary). Plus we offer the ability to tweet your story or use an embed code to add it to your own web site.</p>
 
 	<?php
 	if (get_tbl_count($db, 'stories')) {
@@ -48,9 +48,9 @@ include( 'header.php' );
 	}
 	?>
 
-	<p>What do they look like? What a fantastic question you ask!</p> We have <a href="show.php">a growing collection</a> of mixed bag stories, but for an example see a  <a href="random.php">random</a> one such as we have inserted here. </p>
+	<p>What do stories look like? What a fantastic question you ask!</p> We have <a href="show.php">a growing collection</a> of mixed bag stories, but for an example see a  <a href="random.php">random</a> one such as we have inserted here. </p>
 
-	<p>The code for this site is opensource and available at <a href="http://code.google.com/p/fivecardflickr/">http://code.google.com/p/fivecardflickr/</a></p>
+	<p>The code for this site is opensource and available at <a href="https://github.com/cogdog/5cardflickr">https://github.com/cogdog/5cardflickr</a></p>
 
 	<p>So what are you waiting for? <a href="play.php">Take a fling at weaving a tale with pictures only!</a></p>
 
