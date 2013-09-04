@@ -28,21 +28,9 @@
 			?>
 		</ul>
 	</li>
-	
-	<li><a href="prompts.php">Prompts</a>
-	
-		<ul>
-			<li><a href="prompts.php?suit=5card">Five Card Flickr</a></li>
-			<li><a href="prompts.php?suit=etmooc">#etmooc</a></li>
-			<li><a href="prompts.php?suit=tdc">The Daily Create</a></li>
 		
-		</ul>
-	
-	
-	</li>
-	
 	<li><a href="random.php">Random Story</a></li>
-	<li><a href="http://code.google.com/p/fivecardflickr/">Source Code</a></li>
+	<li><a href="http://chttps://github.com/cogdog/5cardflickr">Source Code</a></li>
 	
 	
 	<?php if (GTRANSKEY !='') : // display google translation menu?>

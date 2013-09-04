@@ -75,7 +75,7 @@ if ($_POST['save']) {
 	// blank user name error check
 	if ( $_POST['title'] == '') { 
 			$errors++;
-			$error_message .= '<li>Please a title for your story.</li>';
+			$error_message .= '<li>Please include a title for your story.</li>';
 	}
 	
 	if ( $_POST['name'] == '') { 
