@@ -39,7 +39,7 @@ include( 'header.php' );
 
 	<p>However, rather than using randomly chosen panels of the old Nancy comic, my version draws upon collections of photos specified by a tag in <a href="http://flickr.com/">flickr</a>. You are dealt five random photos for each draw, and your task is to select one each time to add to your building set of images, that taken together as a final set of 5 - tell a story in pictures.</p>
 
-	<p>When you are done, you can add a title and explanation, and save the story. You can easily put a link in your resume or send to your Mom (she pay print it out and tape it to the fridge, or she may criticize your creativity, your mileage and mom may vary). Plus we offer the ability to tweet your story or use an embed code to add it to your own web site.</p>
+	<p>When you are done, you can add a title and explanation, and save the story. You can easily put a link in your resume or send to your Mom (she may print it out and tape it to the fridge, or she may criticize your creativity, your mileage and mom may vary). Plus we offer the ability to tweet your story or use an embed code to add it to your own web site.</p>
 
 	<?php
 	if (get_tbl_count($db, 'stories')) {
