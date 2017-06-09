@@ -1,15 +1,15 @@
 <?php
 /*
-/*
 Five Card Flickr Site
 by Alan Levine, cogdogblog@gmail.com
 inspired completely by Five-Card Nancy http://www.7415comics.com/nancy/
 
-Five Card Flickr is Copyright  Alan Levine and is distributed under the terms of the GNU General Public License Code Available from http://www.gnu.org/licenses/gpl.html
+Five Card Flickr is Copyright 2008 Alan Levine and is distributed under the terms of the GNU General Public License Code Available from
 
-Code available from https://github.com/cogdog/5cardflickr
+http://code.google.com/p/fivecardflickr/
 
 */  
+
 
 
 // ------- SETUP ---------------------------------------------------------------
@@ -37,17 +37,6 @@ if ($_REQUEST['id']) {
 	
 	$suit = get_suit_from_tag($decks,$flickr_tag,$default_deck);
 	
-	
-	//recaptcha
-	require_once('recaptchalib.php');
-		
-	
-	# the response from reCAPTCHA
-	$captcha_resp = null;
-	# the error code from reCAPTCHA, if any
-	$captcha_error = null;
-
-
 	$errors=0;
 	
 	$page_nav = get_story_links($db, $_REQUEST['id']);
@@ -206,7 +195,8 @@ if (count($other_versions)) {
 <?php if ($use_captcha):?>
 <p>For security purposes, please enter the correct words matching the images (blame the spammers):</p>
 
-<?php echo recaptcha_get_html($publickey, $captcha_error); ?>
+<div class="g-recaptcha" data-sitekey="<?php echo $sitekey?>"></div>
+
 <?php endif?>
 
 
@@ -400,10 +390,3 @@ $(document).ready(function()
 	
 </body>
 </html>
-
-
-
-
-
-
-
