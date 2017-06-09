@@ -1,7 +1,7 @@
 <?php
 /*
 Five Card Flickr 
-version 3.0 (Aug 18, 2013)
+version 3.3
 
 Site http://5card.cogdogblog.com
 by Alan Levine, cogdogblog@gmail.com
@@ -45,7 +45,7 @@ define('PAGER', 200);
 define('PHOTOPAGER', 160);
 
 // password for access to admin tool
-define('ADMINKEY', '*********');
+define('ADMINKEY', '******');
 
 // define site overall title (displayed in header)
 define('SITENAME', 'Five Card Flickr Stories');
@@ -73,19 +73,6 @@ $decks = array(
 
 $default_deck = '5card';
 
-$use_captcha = true; // flag to use captcha for user submissions, highly recommended
-
-if ($use_captcha) {	
-	// Get a key from http://recaptcha.net/api/getkey
-	$publickey = "<insert public key>";
-	$privatekey = "<insert private key>";
-}
-
-// for debugging purposes only
-//ini_set('error_reporting', E_ALL^ E_NOTICE);
-
-
-// - no configuration below here, just some more set up
 
 // array for main site navigation; 
 // keys are the names of the items as they appear on the menu, values are their local URL value
@@ -97,5 +84,17 @@ foreach ($decks as $item=> $value) {
 	$p_sections["{$value['title']}"] = 'play.php?suit=' . $item;
 	$s_sections["{$value['title']}"] = 'show.php?suit=' . $item;
 }
+
+$use_captcha = true; // flag to use captcha for user submissions, highly recommended
+
+
+if ($use_captcha) {	
+	// Get a key from https://www.google.com/recaptcha/
+	$sitekey   = 	"<insert site key>";
+	$secretkey = 	"<insert secret key>";
+}
+
+// for debugging purposes only
+//ini_set('error_reporting', E_ALL^ E_NOTICE);
 
 ?>

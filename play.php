@@ -1,12 +1,11 @@
 <?php
 /*
-Five Card Flickr Site
+Five Card Flickr
 by Alan Levine, cogdogblog@gmail.com
 inspired completely by Five-Card Nancy http://www.7415comics.com/nancy/
 
-Five Card Flickr is Copyright  Alan Levine and is distributed under the terms of the GNU General Public License Code Available from http://www.gnu.org/licenses/gpl.html
-
-Code available from https://github.com/cogdog/5cardflickr
+Five Card Flickr is Copyright 2008-2010 Alan Levine and is distributed under the terms of the GNU General Public License Code Available from
+http://code.google.com/p/fivecardflickr/
 
 play.php
 This script runs the stirybuilding operation using the tag passed to it; one script can do many different iterations of 5 card flickr.
@@ -48,19 +47,7 @@ switch (count($my_ids)) {
 		$my_title = 'Are you ready to play Five Card flickr?';
 		break;
 	case 5:
-		$my_title =  'Five Card flickr completed story';
-	
-	
-		if ($use_captcha) {
-			// set up recaptcha
-			require_once('recaptchalib.php');		
-			
-			# the response from reCAPTCHA
-			$captcha_resp = null;
-			# the error code from reCAPTCHA, if any
-			$captcha_error = null;
-		}
-	
+		$my_title =  'Five Card flickr completed story';	
 		$errors=0;
 	
 		break;
@@ -96,19 +83,28 @@ if ($_POST['save']) {
 	
 	// captcha check
 	
-	if ($use_captcha) {
-		if ($_POST["recaptcha_response_field"] or $_POST["recaptcha_response_field"] == '') {
-			$captcha_resp = recaptcha_check_answer ($privatekey,
-											$_SERVER["REMOTE_ADDR"],
-											$_POST["recaptcha_challenge_field"],
-											$_POST["recaptcha_response_field"]);
+	if ( $use_captcha ) {
+		// get some captcha 
+		$captcha = $_POST['g-recaptcha-response'];
 		
-				if (!$captcha_resp->is_valid) {
+		if ( $captcha ) {
+		
+			// after https://codeforgeek.com/2014/12/google-recaptcha-tutorial/
+        	$ip = $_SERVER['REMOTE_ADDR'];
+        	
+        	// API call, test captcha
+			$response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=". $secretkey . "&response=" . $captcha . "&remoteip=" . $ip);
+        	$responseKeys = json_decode($response,true);
+		
+				if ( intval( $responseKeys["success"] ) !== 1 ) {
 						# set the error code so that we can display it
 						$errors++;
-						$captcha_error = $captcha_resp->error;
-						$error_message .= '<li>Captcha error. Please enter the words that are displayed.</li>';
+						$error_message .= '<li>Captcha error. Please enter the words that are displayed. Try again?</li>';
 				}
+		} else {
+			// empty captcha
+			$errors++;
+			$error_message .= '<li>Captcha missing. Please enter the words that are displayed.</li>';
 		}
 	}
 	
@@ -276,9 +272,10 @@ if ($errors) {
 <textarea name="comments" rows="12" cols="60"><?php echo $_POST['comments']?></textarea>
 
 <?php if ($use_captcha):?>
-<p>For security purposes, please enter the correct words matching the images (blame the spammers):</p>
+<p>For security purposes, please enter the correct words matching the images (blame the spammers for making us do this):</p>
 
-<?php echo recaptcha_get_html($publickey, $captcha_error); ?>
+<div class="g-recaptcha" data-sitekey="<?php echo $sitekey?>"></div>
+
 <?php endif?>
 
 <input name="save" type="submit" value="Save My Story">

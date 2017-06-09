@@ -31,7 +31,7 @@ Setting Up
 
 Yes This is Barebones
 ---------------------
-It's version 1 of the github code. gimme a break!
+It's version 1.something of the github code. But here are _COMMENTS_ within. Gimme a break!
 
 
 

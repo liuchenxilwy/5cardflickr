@@ -25,5 +25,7 @@
 	<![endif]-->
 
 	<!-- / END -->
+	
+	<script src='https://www.google.com/recaptcha/api.js'></script>
 
 	<title><?php echo $my_title?></title>
