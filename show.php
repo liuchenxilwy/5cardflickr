@@ -78,6 +78,8 @@ if ($_REQUEST['id']) {
 	$page_nav = get_set_links($idx,$story_count, $b,'show.php');
 }
 
+$displaycount = ( $story_count < $b ) ? 'all' : $b;
+
 include( 'header.php' );
 ?>
 
@@ -213,7 +215,7 @@ if (count($other_versions)) {
 <?php elseif ($_REQUEST['suit']):?>
 <p align="right"><?php echo $page_nav?></p>
 
-<p>Browse the <?php echo $story_count . ' ' . $decks[$suit]['title']?> stories based on the <a href="photos.php?tag=<?php echo $decks[$suit]['tag']?>"><?php echo $cardcount?> flickr photos tagged with <?php echo $decks[$suit]['tag']?></a>...</p>
+<p>Browse <strong><?php echo $displaycount?></strong> of the  <strong><?php echo $story_count . ' ' . $decks[$suit]['title']?></strong> stories based on the <strong><a href="photos.php?tag=<?php echo $decks[$suit]['tag']?>"><?php echo $cardcount?></strong> flickr photos tagged with <strong><?php echo $decks[$suit]['tag']?></a></strong>...</p>
 
 <ol start="<?php echo $idx + 1?>">
 

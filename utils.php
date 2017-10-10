@@ -15,12 +15,13 @@ function db_connect($db,$script=null) {
 	$ln = @mysql_connect(MYSQL_HOST,MYSQL_USER,MYSQL_PASS);
 	if ( $ln && mysql_select_db($db,$ln) ) {
 		return ($ln);
-	} elseif (CHIEF != '') {
-		// send an email to the site admin if database fails to connect
-		$failure = ($ln) ? 'database: '. $db : ' MySQL Server';
-		$msg = "Can't connect to the $failure.\n\nMySQL reports:\n". mysql_error();
-		if (!is_null($script)) $msg .= "\n\nError occurred in: $script";
-		mail(CHIEF,'5 Card MySQL error',$msg,'From: '.CHIEF."\nX-Mailer: PHP/". phpversion());
+	}
+	else {
+		// if connected to server then database error
+		// $failure = ($ln) ? 'database: '. $db : ' MySQL Server';
+		// $msg = "Can't connect to the $failure.\n\nMySQL reports:\n".mysql_error();
+		// if (!is_null($script)) $msg .= "\n\nError occurred in: $script";
+		// mail(CHIEF,'5 Card MySQL error',$msg,'From: '.CHIEF."\nX-Mailer: PHP/".phpversion());
 		return false;
 	}
 }
@@ -503,23 +504,38 @@ function get_set_links($idx,$total,$batch,$url) {
 	
 	// remove any idx= in the URL string
 	$url = preg_replace('/&idx=([0-9]+)/', '', $url);
+	
+	// rewind link
+	 $first = ( !$idx || $idx <  $batch )  ? '' : '&laquo; <a href="'.$url .'">first</a> ';
 
 	# set prev link
-	$prev = ( (!$idx) || ($idx == 0) ) ? 'prev' : '<a href="'.$url.$conj.'idx='.($idx-$batch).'">prev</a>';
+	$prev = ( !$idx || $idx == 0 ) ? 'prev' : '<a href="'.$url.$conj.'idx='.($idx-$batch).'">prev</a>';
 	
+	// fast forward link
+	$last =  ( $total > 10 * $batch )  ? ' <a href="'.$url.$conj.'idx='. (floor($total/$batch) * $batch) .'">last</a> &raquo' : '';
+
 	# set next link
-	$next = ( ($total - $idx) <= $batch ) ? 'next' : '<a href="'.$url.$conj.'idx='.($idx+$batch).'">next</a>';
+	$next = ( ($total - $idx) <= $batch ) ? 'next' : '<a href="'.$url.$conj.'idx='. ($idx + $batch ) .'">next</a>';
+	
+	// check upper limit for links
+	$upper = min ( 10, floor($total/$batch) );
 
 	if ($total > $batch) {
-		for($i = 0; $i < (ceil($total/$batch)); $i++) {
+		for ($i = ( $idx/$batch ); $i < ( $idx/$batch ) + $upper; $i++) {
 			if (($i*$batch) == $idx)
 				$links .= ' <strong>'.($i+1).'</strong>';
 			else
 				$links .= ' <a href="'.$url.$conj.'idx='.($i*$batch).'">'.($i+1).'</a>';
 		}
+		
+		return "$first &lt; $prev :: $links :: $next &gt; $last";
+		
+	} else {
+		return "";
+	
 	}
 
-	return "&laquo;$prev :: $links :: $next&raquo;";
+	
 
 }
 

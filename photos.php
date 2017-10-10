@@ -4,9 +4,9 @@ Five Card Flickr Site
 by Alan Levine, cogdogblog@gmail.com
 inspired completely by Five-Card Nancy http://www.7415comics.com/nancy/
 
-Five Card Flickr is Copyright  Alan Levine and is distributed under the terms of the GNU General Public License Code Available from http://www.gnu.org/licenses/gpl.html
+Five Card Flickr is Copyright 2008 Alan Levine and is distributed under the terms of the GNU General Public License Code Available from
 
-Code available from https://github.com/cogdog/5cardflickr
+http://code.google.com/p/fivecardflickr/
 
 photos.php
 called to display all photos tracked associated with a given tag
@@ -46,6 +46,10 @@ $params = "tag=" . $flickr_tag;
 $photo_count = get_tbl_count($db, 'cards', "tag='$flickr_tag'");
 $page_nav = get_set_links($idx,$photo_count, $b,'photos.php?' . $params);
 
+
+$displaycount = ( $photo_count < $b ) ? 'all' : $b;
+
+
 include( 'header.php' );
 ?>
 
@@ -60,7 +64,7 @@ include( 'header.php' );
 
 <p align="right"><?php echo $page_nav?></p>
 
-<p>Browse the <strong><?php echo $photo_count?></strong> photos available on this site tagged <strong><?php echo $flickr_tag?></strong> (more may be spotted on <a href="http://flickr.com/photos/tags/<?php echo $flickr_tag?>" target="_blank">flickr</a>)...</p>
+<p>Browse <strong><?php echo $displaycount?></strong> of the <strong><?php echo $photo_count?></strong> photos available on this site tagged <strong><?php echo $flickr_tag?></strong> (more may be spotted on <a href="http://flickr.com/photos/tags/<?php echo $flickr_tag?>" target="_blank">flickr</a>)...</p>
 
 
 <?php
